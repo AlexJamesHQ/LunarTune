@@ -5,17 +5,30 @@ import {
   Sparkles,
   Send
 } from 'lucide-react';
-import { GithubIcon } from './GithubIcon';
 import { Language } from '../types';
 import { LUNARTUNE_LOGO_URL, LUNARTUNE_GITHUB_URL, LUNARTUNE_TELEGRAM_URL } from '../data/kodaData';
 import { useTheme } from '../context/ThemeContext';
 import { ThemeCustomizerCard } from './ThemeCustomizerCard';
 import { PWAInstallButton } from './PWAInstallButton';
-import { SocialShareBar } from './SocialShareBar';
 
 interface NavbarProps {
   lang: Language;
 }
+
+const GitHubIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
 
 export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -77,11 +90,8 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
             ))}
           </nav>
 
-          {/* Action Controls: PWA Install + GitHub + Telegram + Menu */}
+          {/* Action Controls: GitHub + Telegram + Menu */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* PWA Install Button */}
-            <PWAInstallButton />
-
             {/* GitHub Link */}
             <a
               href={LUNARTUNE_GITHUB_URL}
@@ -90,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
               className="p-2.5 rounded-xl bg-white border-[3px] border-black text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
               title="LunarTune GitHub Repository"
             >
-              <GithubIcon className="w-5 h-5" />
+              <GitHubIcon className="w-5 h-5" />
             </a>
 
             {/* Telegram Chat - ALWAYS visible */}
@@ -117,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
         </div>
       </header>
 
-      {/* Slide-out Menu Drawer (Holds Links + PWA + Social Share + Theme Customizer inside) */}
+      {/* Slide-out Menu Drawer */}
       {menuOpen && (
         <div 
           className="fixed inset-0 z-[10030] bg-black/60 backdrop-blur-sm flex justify-end animate-in fade-in duration-200"
@@ -134,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
                   Menu &amp; Preferences
                 </h2>
                 <p className="text-[10px] font-mono text-neutral-600 uppercase font-bold">
-                  LunarTune Web &amp; App Hub
+                  Navigation &amp; Customizer
                 </p>
               </div>
 
@@ -162,11 +172,6 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
                   </a>
                 ))}
               </div>
-            </div>
-
-            {/* Social Share & Community Hub inside Menu */}
-            <div className="space-y-2">
-              <SocialShareBar />
             </div>
 
             {/* Customizer Cards */}

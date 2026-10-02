@@ -119,24 +119,6 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
         >
           Get LunarTune for Your Android Phone
         </h2>
-        
-        {/* Dynamic GitHub Update Status Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#ECFDF5] border-[3px] border-black text-[#065F46] font-mono text-[11px] sm:text-xs font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-            <span>AUTO SYNCED WITH GITHUB RELEASES</span>
-          </div>
-
-          {latestVersion && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F3E8FF] border-[3px] border-black text-[#6B21A8] font-mono text-[11px] sm:text-xs font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-              <Sparkles className="w-4 h-4 text-[#7E22CE] animate-pulse" />
-              <span>LATEST {latestVersion} {releaseDate ? releaseDate : ''}</span>
-            </div>
-          )}
-        </div>
 
         <p className="text-xs sm:text-sm text-neutral-800 font-mono leading-relaxed bg-white border-2 border-black p-4 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-w-2xl mx-auto">
           Pick the APK matching your processor architecture. When you update the LunarTune APK on GitHub, these buttons instantly fetch and download the latest version automatically!
