@@ -1,0 +1,127 @@
+@layer base {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF6EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 9999px;
+  border: 2px solid #FAF6EE;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4B5563;
+}
+
+/* Material 3 Expressive Morph and Blob Animations */
+@keyframes blob-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.03);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-blob {
+  animation: blob-float 8s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Voxel Canvas & 3D styling */
+.voxel-shadow {
+  box-shadow: 0 20px 50px -10px rgba(103, 80, 164, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.m3-pill {
+  border-radius: 9999px;
+}
+
+.m3-squircle {
+  border-radius: 28px;
+}
+
+@keyframes flap {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.35);
+  }
+}
+
+.animate-flap {
+  animation: flap 0.16s infinite ease-in-out;
+  display: inline-block;
+  transform-origin: center;
+}
+
+/* Neobrutalist Background Grid Styles */
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 48px 48px;
+  }
+}
+
+@keyframes hyperspeedDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 96px 96px;
+  }
+}
+
+.backdrop-grid-classic {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.backdrop-grid-slow-drift {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.09) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: gridDrift 14s linear infinite;
+}
+
+.backdrop-grid-hyperspeed {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.14) 1.5px, transparent 1.5px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.14) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  animation: hyperspeedDrift 2.5s linear infinite;
+}
+
+.backdrop-grid-retro-dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.18) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+.backdrop-grid-dots-drift {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.18) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  animation: gridDrift 10s linear infinite;
+}

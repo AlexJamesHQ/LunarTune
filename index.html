@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LunarTune</title>
+    <meta name="description" content="Revamped YouTube Music Experience on Android. High-performance, privacy-focused, and packed with features for people who really care about their music." />
+    
+    <!-- PWA & Mobile Capabilities -->
+    <meta name="theme-color" content="#FFE600" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="LunarTune" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png" />
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+    <!-- Open Graph / Facebook / WhatsApp / Instagram Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LunarTune" />
+    <meta property="og:title" content="LunarTune - Revamped YouTube Music Experience on Android" />
+    <meta property="og:description" content="High-performance, privacy-focused, Material 3 styled YouTube Music client for Android with live synced lyrics, 9 player styles, lossless audio, and no ads." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="LunarTune Logo" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LunarTune - Revamped YouTube Music Experience on Android" />
+    <meta name="twitter:description" content="High-performance, privacy-focused, Material 3 styled YouTube Music client for Android with live synced lyrics, 9 player styles, lossless audio, and no ads." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              display: ['Outfit', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body class="bg-[#FAF6EE] text-gray-900 antialiased selection:bg-purple-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

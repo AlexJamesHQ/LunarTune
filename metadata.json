@@ -1,0 +1,8 @@
+{
+  "name": "LunarTune",
+  "description": "Revamped YouTube Music Experience on Android. High-performance, privacy-focused, and packed with features for people who really care about their experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
