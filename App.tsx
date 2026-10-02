@@ -6,7 +6,6 @@ import { ScreenshotsGallery } from './src/components/ScreenshotsGallery';
 import { FeaturesSection } from './src/components/FeaturesSection';
 import { DownloadSection } from './src/components/DownloadSection';
 import { Footer } from './src/components/Footer';
-import { FlyingButterflies } from './src/components/FlyingButterflies';
 import { Language } from './src/types';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import { play8BitBlip } from './src/utils/audio';
@@ -81,9 +80,6 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen bg-[#FAF6EE] text-black font-sans selection:bg-purple-600 selection:text-white relative overflow-hidden">
       {/* Dynamic Background Pattern based on selected Grid Style */}
       <div className={`fixed inset-0 pointer-events-none z-0 ${getGridClass()}`} />
-
-      {/* Floating Animated Butterflies */}
-      <FlyingButterflies />
 
       {/* Navigation Bar */}
       <motion.div
