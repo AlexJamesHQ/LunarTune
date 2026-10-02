@@ -111,7 +111,7 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
         </div>
       )}
 
-      {/* Header and Floating Butterfly */}
+      {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 relative overflow-visible">
         <h2 
           style={{ textShadow: `3px 3px 0px ${accentColor.hex}` }}
