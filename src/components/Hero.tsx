@@ -58,11 +58,10 @@ export const Hero: React.FC<HeroProps> = ({ lang }) => {
         {/* Hero Title & Subtitle with dynamic accent text shadow */}
         <div className="space-y-4 max-w-4xl mx-auto">
           <h1 
-            style={{ textShadow: `4px 4px 0px ${accentColor.hex}` }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-sans font-black uppercase text-black tracking-tighter leading-[1] transition-all duration-300"
+            style={{ textShadow: `3px 3px 0px ${accentColor.hex}` }}
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black uppercase text-black tracking-tight leading-[1.1] transition-all duration-300"
           >
-            Revamped YouTube Music <br />
-            Experience on Android
+            Revamped YouTube Music Experience on Android
           </h1>
 
           <p className="text-sm sm:text-base font-mono text-neutral-800 font-bold max-w-2xl mx-auto">
