@@ -1,0 +1,31 @@
+{
+  "id": "/",
+  "name": "LunarTune",
+  "short_name": "LunarTune",
+  "description": "Revamped YouTube Music Experience on Android. High-performance, privacy-focused, and packed with features.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF6EE",
+  "theme_color": "#FFE600",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
