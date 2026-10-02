@@ -3,24 +3,21 @@ import {
   Download,
   Smartphone,
   RefreshCw,
-  CheckCircle2,
-  Sparkles
+  CheckCircle2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Language } from '../types';
-import { DOWNLOAD_OPTIONS, LUNARTUNE_GITHUB_URL } from '../data/kodaData';
+import { DOWNLOAD_OPTIONS } from '../data/kodaData';
 import { useTheme } from '../context/ThemeContext';
 
 interface DownloadSectionProps {
   lang: Language;
 }
 
-export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
+export const DownloadSection: React.FC<DownloadSectionProps> = () => {
   const [downloadingAbi, setDownloadingAbi] = useState<string | null>(null);
   const [downloadToast, setDownloadToast] = useState<string | null>(null);
   const [options, setOptions] = useState(DOWNLOAD_OPTIONS);
-  const [latestVersion, setLatestVersion] = useState<string | null>(null);
-  const [releaseDate, setReleaseDate] = useState<string | null>(null);
   const { accentColor } = useTheme();
 
   useEffect(() => {
@@ -30,43 +27,35 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
         if (!response.ok) return;
         const data = await response.json();
         
-        if (data && data.tag_name) {
-          setLatestVersion(data.tag_name);
-          if (data.published_at) {
-            const date = new Date(data.published_at);
-            setReleaseDate(date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }));
-          }
-
-          if (data.assets && Array.isArray(data.assets) && data.assets.length > 0) {
-            const updatedOptions = DOWNLOAD_OPTIONS.map((opt) => {
-              const matchingAsset = data.assets.find((asset: any) => {
-                const name = asset.name.toLowerCase();
-                if (opt.abi === 'arm64-v8a') {
-                  return name.includes('arm64') || name.includes('v8a');
-                }
-                if (opt.abi === 'armeabi-v7a') {
-                  return name.includes('v7a') || (name.includes('32') && !name.includes('64'));
-                }
-                if (opt.abi === 'universal') {
-                  return name.includes('universal') || name.includes('all');
-                }
-                return false;
-              });
-
-              if (matchingAsset) {
-                const formattedSize = (matchingAsset.size / (1024 * 1024)).toFixed(1) + ' MB';
-                return {
-                  ...opt,
-                  filename: matchingAsset.name,
-                  fileSize: formattedSize,
-                  downloadUrl: matchingAsset.browser_download_url
-                };
+        if (data && data.assets && Array.isArray(data.assets) && data.assets.length > 0) {
+          const updatedOptions = DOWNLOAD_OPTIONS.map((opt) => {
+            const matchingAsset = data.assets.find((asset: any) => {
+              const name = asset.name.toLowerCase();
+              if (opt.abi === 'arm64-v8a') {
+                return name.includes('arm64') || name.includes('v8a');
               }
-              return opt;
+              if (opt.abi === 'armeabi-v7a') {
+                return name.includes('v7a') || (name.includes('32') && !name.includes('64'));
+              }
+              if (opt.abi === 'universal') {
+                return name.includes('universal') || name.includes('all');
+              }
+              return false;
             });
 
-            setOptions(updatedOptions);
-          }
+            if (matchingAsset) {
+              const formattedSize = (matchingAsset.size / (1024 * 1024)).toFixed(1) + ' MB';
+              return {
+                ...opt,
+                filename: matchingAsset.name,
+                fileSize: formattedSize,
+                downloadUrl: matchingAsset.browser_download_url
+              };
+            }
+            return opt;
+          });
+
+          setOptions(updatedOptions);
         }
       } catch (err) {
         console.error('Failed to auto-fetch LunarTune GitHub releases:', err);
@@ -79,23 +68,34 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
   const handleDownload = (abi: string, filename: string, url: string) => {
     setDownloadingAbi(abi);
     
-    // Fire festive celebratory confetti
-    confetti({
-      particleCount: 100,
-      spread: 80,
-      origin: { y: 0.7 }
-    });
+    // Festive celebratory confetti
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.7 }
+      });
+    } catch (e) {}
 
     setDownloadToast(`Starting LunarTune download...`);
 
+    // Trigger direct download element to prevent popup-blockers on Android/iOS
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
     setTimeout(() => {
       setDownloadingAbi(null);
-      window.open(url, '_blank');
-    }, 1000);
+    }, 1500);
 
     setTimeout(() => {
       setDownloadToast(null);
-    }, 4000);
+    }, 3500);
   };
 
   return (
@@ -115,7 +115,7 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
       <div className="text-center max-w-3xl mx-auto space-y-4 relative overflow-visible">
         <h2 
           style={{ textShadow: `3px 3px 0px ${accentColor.hex}` }}
-          className="text-3xl sm:text-5xl font-sans font-black text-black uppercase tracking-tight relative inline-block transition-all duration-300"
+          className="text-2xl sm:text-4xl lg:text-5xl font-sans font-black text-black uppercase tracking-tight relative inline-block transition-all duration-300"
         >
           Get LunarTune for Your Android Phone
         </h2>
@@ -126,7 +126,7 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
       </div>
 
       {/* 3 ABI Architecture Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         {options.map((opt) => (
           <div
             key={opt.abi}
@@ -137,10 +137,13 @@ export const DownloadSection: React.FC<DownloadSectionProps> = ({ lang }) => {
                 <Smartphone className="w-6 h-6 text-black" />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <h3 className="text-lg font-sans font-black text-black uppercase tracking-tight">
                   {opt.label}
                 </h3>
+                <div className="font-mono text-xs font-bold text-neutral-600">
+                  {opt.fileSize} • {opt.version}
+                </div>
               </div>
 
               <p className="text-xs text-neutral-700 font-mono leading-relaxed">
