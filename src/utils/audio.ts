@@ -184,3 +184,148 @@ export const playButterflyFlutter = (soundEnabled: boolean = true) => {
     osc.stop(ctx.currentTime + 0.06);
   } catch (err) {}
 };
+
+/**
+ * 7 Unique Signature Sounds for each Color Theme:
+ * 1. monochrome -> Crystal Double Beep (Clean sine bell)
+ * 2. yellow     -> Cyber Arcade Arp (C5 -> E5 -> G5 -> C6)
+ * 3. mint       -> Forest Spring Bounce (Rapid spring pulse)
+ * 4. blue       -> Electric Down-Laser (Futuristic laser slide)
+ * 5. pink       -> Sweet Bubble Sparkle (High pitch staccato trill)
+ * 6. orange     -> Warm Power Brass (Full warm retro triad)
+ * 7. purple     -> Mystic Cosmic Chord (Dual detuned space chime)
+ */
+export const playColorSound = (colorId: string, forcePlay: boolean = true) => {
+  if (!forcePlay) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+
+    const t = ctx.currentTime;
+
+    switch (colorId) {
+      case 'monochrome': {
+        // Pure Crystal Chime: 659.25Hz -> 1318.5Hz clean sine
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(659.25, t);
+        osc.frequency.setValueAtTime(1318.5, t + 0.05);
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.18);
+        break;
+      }
+      case 'yellow': {
+        // Arcade Cyber Arpeggio: 4 notes up
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const st = t + i * 0.035;
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, st);
+          gain.gain.setValueAtTime(0.1, st);
+          gain.gain.exponentialRampToValueAtTime(0.001, st + 0.09);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(st);
+          osc.stop(st + 0.09);
+        });
+        break;
+      }
+      case 'mint': {
+        // Bouncy spring vibrato
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, t);
+        osc.frequency.exponentialRampToValueAtTime(880, t + 0.04);
+        osc.frequency.exponentialRampToValueAtTime(660, t + 0.09);
+        osc.frequency.exponentialRampToValueAtTime(1100, t + 0.14);
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.15);
+        break;
+      }
+      case 'blue': {
+        // Sci-Fi Laser Sweep
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(1174.66, t);
+        osc.frequency.exponentialRampToValueAtTime(329.63, t + 0.14);
+        gain.gain.setValueAtTime(0.08, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.14);
+        break;
+      }
+      case 'pink': {
+        // Sweet Bubble Pop Sparkle
+        const pitches = [783.99, 1046.5, 1318.51, 1567.98];
+        pitches.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const st = t + i * 0.03;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, st);
+          gain.gain.setValueAtTime(0.09, st);
+          gain.gain.exponentialRampToValueAtTime(0.001, st + 0.07);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(st);
+          osc.stop(st + 0.07);
+        });
+        break;
+      }
+      case 'orange': {
+        // Warm Power Brass Triad
+        [392.00, 493.88, 587.33].forEach((freq) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, t);
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.5, t + 0.12);
+          gain.gain.setValueAtTime(0.06, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.16);
+        });
+        break;
+      }
+      case 'purple': {
+        // Cosmic Mystic Space Warp: detuned ethereal chime
+        [523.25, 528.00, 830.61].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const st = t + i * 0.025;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, st);
+          gain.gain.setValueAtTime(0.08, st);
+          gain.gain.exponentialRampToValueAtTime(0.001, st + 0.18);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(st);
+          osc.stop(st + 0.18);
+        });
+        break;
+      }
+      default:
+        play8BitBlip(true);
+    }
+  } catch (err) {}
+};
