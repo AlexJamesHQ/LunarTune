@@ -15,7 +15,7 @@
   <a href="https://github.com/cognitiveshadows03/LunarTune/releases">
     <img src="https://img.shields.io/github/v/release/cognitiveshadows03/LunarTune?style=for-the-badge&color=FFE600&labelColor=000000" alt="Latest Release" />
   </a>
-  <a href="https://t.me/LunarTune">
+  <a href="https://t.me/LunarTuneGC">
     <img src="https://img.shields.io/badge/Telegram-Community-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Community" />
   </a>
   <a href="https://www.virustotal.com/gui/file/f42cf0fdf8e62f0ba136c1e57c6fa7ddcb6b38c227eb0c8411d95ee2a74c1ebc">
