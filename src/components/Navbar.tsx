@@ -3,13 +3,15 @@ import {
   Menu,
   X,
   Sparkles,
-  Send
+  Send,
+  Smartphone,
+  Download,
+  ExternalLink
 } from 'lucide-react';
 import { Language } from '../types';
 import { LUNARTUNE_LOGO_URL, LUNARTUNE_GITHUB_URL, LUNARTUNE_TELEGRAM_URL } from '../data/kodaData';
 import { useTheme } from '../context/ThemeContext';
 import { ThemeCustomizerCard } from './ThemeCustomizerCard';
-import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
   lang: Language;
@@ -46,29 +48,24 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
         style={{ backgroundColor: accentColor.hex }}
         className="fixed top-0 left-0 right-0 z-[10020] w-full border-b-[4px] border-black text-black shadow-md transition-colors duration-300"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
           {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="p-1 bg-white border-[3px] border-black rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center">
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group flex-shrink min-w-0 mr-1 sm:mr-0">
+            <div className="p-1 bg-white border-[2.5px] sm:border-[3px] border-black rounded-xl sm:rounded-2xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center flex-shrink-0">
               <img 
                 src={LUNARTUNE_LOGO_URL} 
-                width="50" 
-                height="50" 
+                width="44" 
+                height="44" 
                 alt="LunarTune Logo" 
-                className="w-11 h-11 object-contain rounded-xl" 
+                className="w-8 h-8 sm:w-11 sm:h-11 object-contain rounded-lg sm:rounded-xl" 
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = '/icon.svg';
                 }} 
               />
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-sans font-black text-2xl uppercase tracking-tight text-black">LunarTune</span>
-              </div>
-              <div className="text-[10px] text-black font-mono uppercase font-bold tracking-wider">
-                Revamped YouTube Music
-              </div>
+            <div className="min-w-0">
+              <span className="font-sans font-black text-lg sm:text-2xl uppercase tracking-tight text-black whitespace-nowrap">LunarTune</span>
             </div>
           </a>
 
@@ -91,16 +88,16 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
           </nav>
 
           {/* Action Controls: GitHub + Telegram + Menu */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
             {/* GitHub Link */}
             <a
               href={LUNARTUNE_GITHUB_URL}
               target="_blank"
               rel="noreferrer"
-              className="p-2.5 rounded-xl bg-white border-[3px] border-black text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+              className="p-2 sm:p-2.5 rounded-xl bg-white border-[2.5px] sm:border-[3px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
               title="LunarTune GitHub Repository"
             >
-              <GitHubIcon className="w-5 h-5" />
+              <GitHubIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
 
             {/* Telegram Chat - ALWAYS visible */}
@@ -108,19 +105,19 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
               href={LUNARTUNE_TELEGRAM_URL}
               target="_blank"
               rel="noreferrer"
-              className="p-2.5 rounded-xl bg-white border-[3px] border-black text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
+              className="p-2 sm:p-2.5 rounded-xl bg-white border-[2.5px] sm:border-[3px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center"
               title="LunarTune Telegram Community"
             >
-              <Send className="w-5 h-5 text-black" />
+              <Send className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
             </a>
 
             {/* Menu Button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2.5 px-3 rounded-xl bg-white border-[3px] border-black text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex items-center gap-1.5"
+              className="p-2 sm:p-2.5 px-2.5 sm:px-3 rounded-xl bg-white border-[2.5px] sm:border-[3px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] sm:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex items-center gap-1.5"
               title="Open Menu"
             >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {menuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
               <span className="hidden sm:inline font-mono font-black text-xs uppercase">Menu</span>
             </button>
           </div>
@@ -137,64 +134,131 @@ export const Navbar: React.FC<NavbarProps> = ({ lang }) => {
             className="w-full max-w-md bg-[#FAF6EE] h-full border-l-[4px] border-black shadow-[-8px_0px_0px_0px_rgba(0,0,0,1)] p-5 sm:p-6 overflow-y-auto space-y-6 animate-in slide-in-from-right duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Drawer Header */}
+            {/* Drawer Header with colorful accent badge */}
             <div className="flex items-center justify-between pb-4 border-b-[3px] border-black">
-              <div>
-                <h2 className="text-base font-sans font-black uppercase tracking-tight text-black">
-                  Menu &amp; Preferences
-                </h2>
-                <p className="text-[10px] font-mono text-neutral-600 uppercase font-bold">
-                  Navigation &amp; Customizer
-                </p>
+              <div className="flex items-center gap-2.5">
+                <div 
+                  style={{ backgroundColor: accentColor.hex }}
+                  className="w-10 h-10 rounded-xl border-[2.5px] border-black flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex-shrink-0"
+                >
+                  <img 
+                    src={LUNARTUNE_LOGO_URL} 
+                    alt="Logo"
+                    className="w-7 h-7 object-contain rounded-lg"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/icon.svg';
+                    }}
+                  />
+                </div>
+                <div>
+                  <h2 className="text-base font-sans font-black uppercase tracking-tight text-black flex items-center gap-1.5">
+                    <span>Menu &amp; Preferences</span>
+                  </h2>
+                </div>
               </div>
 
               <button
                 onClick={() => setMenuOpen(false)}
-                className="w-9 h-9 rounded-xl bg-white border-[2.5px] border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer transition-all"
+                className="w-10 h-10 rounded-xl bg-[#FEE2E2] hover:bg-[#FECACA] border-[2.5px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer transition-all"
                 title="Close Menu"
               >
-                <X className="w-5 h-5 font-black" />
+                <X className="w-5 h-5 font-black text-black" />
               </button>
             </div>
 
-            {/* Navigation Quick Links inside Menu - only Screenshots & Features */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-mono font-black uppercase text-neutral-700">// QUICK NAVIGATION</div>
+            {/* Quick Navigation Cards with lively colors */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between text-[11px] font-mono font-black uppercase text-neutral-700">
+                <span>// QUICK NAVIGATION</span>
+                <span className="text-[9px] bg-white px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]">Jump to</span>
+              </div>
               <div className="grid grid-cols-2 gap-2.5">
-                {navLinks.filter(l => l.href !== '#download').map((link, i) => (
-                  <a
-                    key={i}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-xl text-center text-xs uppercase font-black tracking-wider text-black bg-white border-[2.5px] border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                <a
+                  href="#screenshots"
+                  onClick={() => setMenuOpen(false)}
+                  className="p-3 rounded-xl bg-[#DCFCE7] border-[2.5px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#BBF7D0] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between group"
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <Smartphone className="w-5 h-5 text-emerald-800" />
+                    <span className="text-[9px] font-mono font-black bg-white px-1.5 py-0.5 rounded border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]">9 Screens</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs uppercase font-black tracking-tight text-black">Screenshots</div>
+                    <div className="text-[10px] font-mono text-emerald-900 font-bold">App Showcase</div>
+                  </div>
+                </a>
+
+                <a
+                  href="#features"
+                  onClick={() => setMenuOpen(false)}
+                  className="p-3 rounded-xl bg-[#FEF08A] border-[2.5px] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FDE047] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between group"
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <Sparkles className="w-5 h-5 text-amber-800 fill-amber-300" />
+                    <span className="text-[9px] font-mono font-black bg-white px-1.5 py-0.5 rounded border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]">Bento</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs uppercase font-black tracking-tight text-black">Features</div>
+                    <div className="text-[10px] font-mono text-amber-900 font-bold">M3 &amp; Lyrics</div>
+                  </div>
+                </a>
               </div>
             </div>
 
-            {/* Customizer Cards */}
+            {/* Customizer Cards with Colorful Headers */}
             <div className="space-y-2 pt-2 border-t-2 border-black/10">
-              <div className="text-[11px] font-mono font-black uppercase text-neutral-700">// THEME &amp; AUDIO CONTROLS</div>
+              <div className="flex items-center justify-between text-[11px] font-mono font-black uppercase text-neutral-700">
+                <span>// THEME &amp; AUDIO CONTROLS</span>
+                <span className="text-[9px] bg-white px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]">Real-time</span>
+              </div>
               <ThemeCustomizerCard onClose={() => setMenuOpen(false)} />
             </div>
 
-            {/* In-Menu PWA Install */}
+            {/* Social & Community Quick Links with colorful buttons */}
             <div className="space-y-2 pt-2 border-t-2 border-black/10">
-              <div className="text-[11px] font-mono font-black uppercase text-neutral-700">// WEB APP (PWA)</div>
-              <PWAInstallButton variant="menu" />
+              <div className="text-[11px] font-mono font-black uppercase text-neutral-700">// COMMUNITY &amp; CODE</div>
+              <div className="grid grid-cols-2 gap-2.5">
+                <a
+                  href={LUNARTUNE_TELEGRAM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2.5 px-3 rounded-xl bg-[#E0F2FE] hover:bg-[#BAE6FD] border-[2.5px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <Send className="w-4 h-4 text-[#0284C7]" />
+                    <span className="text-xs font-mono font-black">Telegram</span>
+                  </div>
+                  <ExternalLink className="w-3 h-3 text-neutral-600" />
+                </a>
+
+                <a
+                  href={LUNARTUNE_GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2.5 px-3 rounded-xl bg-[#F3F4F6] hover:bg-[#E5E7EB] border-[2.5px] border-black text-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <GitHubIcon className="w-4 h-4 text-black" />
+                    <span className="text-xs font-mono font-black">GitHub</span>
+                  </div>
+                  <ExternalLink className="w-3 h-3 text-neutral-600" />
+                </a>
+              </div>
             </div>
 
-            {/* SINGLE Download Button inside Menu */}
+            {/* Colorful Download Button inside Menu */}
             <div className="pt-2">
               <a
                 href="#download"
                 onClick={() => setMenuOpen(false)}
                 style={{ backgroundColor: accentColor.hex }}
-                className="block w-full py-3.5 rounded-xl text-black text-center text-xs uppercase font-black tracking-wider border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="w-full py-3.5 px-4 rounded-xl text-black text-center text-xs uppercase font-black tracking-wider border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                Download LunarTune APK
+                <Download className="w-4 h-4 text-black stroke-[3px]" />
+                <span>Download LunarTune APK</span>
+                <span className="text-[10px] font-mono font-black bg-white text-black px-2 py-0.5 rounded border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                  Free
+                </span>
               </a>
             </div>
           </div>

@@ -7,15 +7,13 @@ import {
   Download,
   AlertCircle,
   MessageSquare,
-  Scale,
-  ShieldCheck
+  Scale
 } from 'lucide-react';
 import { Language } from '../types';
 import {
   LUNARTUNE_LOGO_URL,
   LUNARTUNE_GITHUB_URL,
-  LUNARTUNE_TELEGRAM_URL,
-  LUNARTUNE_VIRUSTOTAL_URL
+  LUNARTUNE_TELEGRAM_URL
 } from '../data/kodaData';
 import { useTheme } from '../context/ThemeContext';
 
@@ -69,12 +67,6 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
       url: LUNARTUNE_TELEGRAM_URL,
       icon: <MessageSquare className="w-4 h-4 text-black" />,
       desc: 'Join LunarTune discussions'
-    },
-    {
-      title: 'VirusTotal Scan',
-      url: LUNARTUNE_VIRUSTOTAL_URL,
-      icon: <ShieldCheck className="w-4 h-4 text-black" />,
-      desc: 'Verified clean & safe'
     },
     {
       title: 'License',
