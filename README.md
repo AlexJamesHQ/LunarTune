@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/cognitiveshadows03/LunarTune/main/app/src/main/res/drawable/lunartune.png" width="160" height="160" alt="LunarTune Logo" />
+  <img src="https://github.com/user-attachments/assets/ed6ce5e4-b900-43ee-93e0-305bd711e370" width="160" height="160" alt="LunarTune Logo" />
 </p>
 
 <h1 align="center">LunarTune</h1>
