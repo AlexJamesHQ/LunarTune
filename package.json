@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@google/genai": "^1.27.0",
-    "@types/canvas-confetti": "^1.9.0",
     "canvas-confetti": "^1.9.4",
-    "lucide-react": "^1.50.0",
+    "lucide-react": "^1.51.0",
     "motion": "^14.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
