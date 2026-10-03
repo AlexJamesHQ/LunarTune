@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { play8BitBlip, play8BitToggle, play8BitChime } from '../utils/audio';
+import { play8BitBlip, play8BitToggle, play8BitChime, playColorSound } from '../utils/audio';
 
 export type AccentColorId = 'monochrome' | 'yellow' | 'mint' | 'blue' | 'pink' | 'orange' | 'purple';
 
@@ -38,7 +38,7 @@ export const GRID_STYLES: GridStyleDef[] = [
 
 interface ThemeContextType {
   accentColor: AccentColorDef;
-  setAccentColorById: (id: AccentColorId) => void;
+  setAccentColorById: (id: AccentColorId, forceSound?: boolean) => void;
   gridStyle: GridStyleId;
   setGridStyle: (style: GridStyleId) => void;
   retroSound: boolean;
@@ -50,44 +50,27 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [accentId, setAccentId] = useState<AccentColorId>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('lunartune_accent_color');
-      if (saved && ACCENT_COLORS.some(c => c.id === saved)) {
-        return saved as AccentColorId;
-      }
-    }
-    return 'yellow';
-  });
+  const [accentId, setAccentId] = useState<AccentColorId>('monochrome');
+  const [gridStyle, setGridStyleState] = useState<GridStyleId>('classic-static');
+  const [retroSound, setRetroSoundState] = useState<boolean>(false);
 
-  const [gridStyle, setGridStyleState] = useState<GridStyleId>(() => {
+  // Clear any past session overrides to ensure clean default state (White theme, sound muted)
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('lunartune_grid_style');
-      if (saved && GRID_STYLES.some(g => g.id === saved)) {
-        return saved as GridStyleId;
-      }
+      localStorage.removeItem('lunartune_accent_color');
+      localStorage.removeItem('lunartune_grid_style');
+      localStorage.removeItem('lunartune_retro_sound');
     }
-    return 'classic-static';
-  });
-
-  const [retroSound, setRetroSoundState] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('lunartune_retro_sound');
-      if (saved !== null) {
-        return saved === 'true';
-      }
-    }
-    return true;
-  });
+  }, []);
 
   const [isMenuCustomizerOpen, setIsMenuCustomizerOpen] = useState(false);
 
-  const setAccentColorById = (id: AccentColorId) => {
+  const setAccentColorById = (id: AccentColorId, forceSound: boolean = false) => {
     setAccentId(id);
     if (typeof window !== 'undefined') {
       localStorage.setItem('lunartune_accent_color', id);
     }
-    play8BitChime(retroSound);
+    playColorSound(id, forceSound || retroSound);
   };
 
   const setGridStyle = (style: GridStyleId) => {
